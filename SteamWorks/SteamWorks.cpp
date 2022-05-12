@@ -68,6 +68,20 @@ int main()
     BSteamRemotePlayActive();
     return 0;
 }
+void ListLobbyData(CSteamID lobbyID)
+{
+    int nData = SteamMatchmaking()->GetLobbyDataCount(lobbyID);
+    char key[k_nMaxLobbyKeyLength];
+    char value[k_cubChatMetadataMax];
+    for (int i = 0; i < nData; ++i)
+    {
+        bool bSuccess = SteamMatchmaking()->GetLobbyDataByIndex(lobbyID, i, key, k_nMaxLobbyKeyLength, value, k_cubChatMetadataMax);
+        if (bSuccess)
+        {
+            printf("Lobby Data %d, Key: \"%s\" - Value: \"%s\"\n", i, key, value);
+        }
+    }
+}
 bool BSteamRemotePlayActive()
 {
     uint32 unSessionCount = SteamRemotePlay()->GetSessionCount();
