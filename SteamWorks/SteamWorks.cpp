@@ -4,6 +4,20 @@
 
 int main()
 {
+    SteamAPI_Init();
+
+	if (SteamAPI_RestartAppIfNecessary(11051998))
+	{
+		printf("APP ID OK.\n");
+
+		return 1;
+	}
+
+	if (!SteamAPI_Init())
+	{
+		printf("Fatal Error - Steam doit etre lance ! (SteamAPI_Init() failed).\n");
+		return 1;
+	}
 
     char lettre;
     char lettre2;
@@ -14,8 +28,7 @@ int main()
     int x = 1;
     int y = 1;
     //Les variable des boucles pours
-
-    //Affectation par l'utilisateur de la taille et des lettres
+	    //Affectation par l'utilisateur de la taille et des lettres
     printf("Entrez la lettre 1\n");
     scanf("%c", &lettre);
     fflush(stdin);
@@ -45,6 +58,6 @@ int main()
         printf("\n");
 
     }
-    return 0;
+	return 0;
 }
 
